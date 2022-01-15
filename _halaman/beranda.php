@@ -3,11 +3,11 @@ $title = "Beranda";
 $judul = $title;
 
 ?>
-<?= $session->pull("info") ?>
 
 <?= content_open($title = 'Informasi Beranda') ?>
+<?= $session->pull("info") ?>
 <h1>
-    <center>Selamat Datang</center>
+  <center>Selamat Datang</center>
 </h1>
 <br>
 

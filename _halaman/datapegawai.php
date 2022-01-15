@@ -79,7 +79,6 @@ window.location.href = "<?= url('datapegawai') ?>";
 <?php
 }
 
-
 if (isset($_GET['tambah']) or isset($_GET['edit'])) {
 
   $id_pegawai = "";
@@ -111,7 +110,7 @@ if (isset($_GET['tambah']) or isset($_GET['edit'])) {
       $jabatan_pegawai = $row->JABATAN;
       $notelp_pegawai = $row->NO_TELEPON;
       $status_pegawai = $row->SPEGAWAI;
-      $upload_profil  = $row->UPLOAD;
+      $upload_profil = $row->UPLOAD;
     }
   }
 ?>
@@ -223,7 +222,7 @@ if (isset($_GET['tambah']) or isset($_GET['edit'])) {
                     <?= $no ?>
                 </center>
             </td>
-            <td><img src="assets/unggah/profil-pegawai/<?=  $row->UPLOAD ?>" width="80px"></td>
+            <td><img src="assets/unggah/profil-pegawai/<?= $row->UPLOAD ?>" width="80px"></td>
             <td><?= $row->NAMA ?></td>
             <td><?= $row->NIP ?></td>
             <td><?= $row->TEMPAT_LAHIR ?></td>

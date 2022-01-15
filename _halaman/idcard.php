@@ -10,55 +10,54 @@ include './assets/phpqrcode/qrlib.php';
 $db = mysqli_connect("localhost", "root", "", "dbkppegawai");
 
 if (mysqli_connect_errno()) {
-    echo "Koneksi database gagal : " . mysqli_connect_error();
+  echo "Koneksi database gagal : " . mysqli_connect_error();
 }
-
 
 function registrasi($data)
 {
 
-    global $db;
+  global $db;
 
-    $email = $data["email"];
-    $usernama = $data["usernama"];
-    $username = strtolower(stripslashes($data["username"]));
-    $password = $data["password"];
-    $password2 = $data["password2"];
+  $email = $data["email"];
+  $usernama = $data["usernama"];
+  $username = strtolower(stripslashes($data["username"]));
+  $password = $data["password"];
+  $password2 = $data["password2"];
 
-    $result = mysqli_query($db, "SELECT admin_username FROM tbl_admin WHERE admin_username = '$username'");
+  $result = mysqli_query($db, "SELECT admin_username FROM tbl_admin WHERE admin_username = '$username'");
 
-    if (mysqli_fetch_assoc($result)) {
+  if (mysqli_fetch_assoc($result)) {
 
-        echo "<script>
+    echo "<script>
  			alert('Username Telah Digunakan!');
  			</script>";
 
-        return false;
-    }
+    return false;
+  }
 
-    if ($password !== $password2) {
+  if ($password !== $password2) {
 
-        echo "<script>
+    echo "<script>
  			alert('Konfirmasi Password Tidak Sesuai!');
  			</script>";
 
-        return false;
-    }
+    return false;
+  }
 
-    mysqli_query($db, "INSERT INTO tbl_admin VALUES('', '$username','$usernama', '$password','$email')");
+  mysqli_query($db, "INSERT INTO tbl_admin VALUES('', '$username','$usernama', '$password','$email')");
 
-    return mysqli_affected_rows($db);
+  return mysqli_affected_rows($db);
 }
 
 function query($query)
 {
-    global $db;
-    $result = mysqli_query($db, $query);
-    $rows = [];
-    while ($row = mysqli_fetch_assoc($result)) {
-        $rows[] = $row;
-    }
-    return $rows;
+  global $db;
+  $result = mysqli_query($db, $query);
+  $rows = [];
+  while ($row = mysqli_fetch_assoc($result)) {
+    $rows[] = $row;
+  }
+  return $rows;
 }
 
 ?>
@@ -68,7 +67,7 @@ function query($query)
 <br>
 
 <?php
-$query = mysqli_query($db, "SELECT * FROM pegawai  WHERE ID ='" .  $_GET['id'] . "'");
+$query = mysqli_query($db, "SELECT * FROM pegawai  WHERE ID ='" . $_GET['id'] . "'");
 while ($data = mysqli_fetch_array($query)) {
 ?>
 
@@ -87,7 +86,7 @@ while ($data = mysqli_fetch_array($query)) {
 
     <div class="profile-container">
         <div class="img-container">
-            <img src="assets/unggah/profil-pegawai/<?php echo $data["UPLOAD"];?>">
+            <img src="assets/unggah/profil-pegawai/<?php echo $data["UPLOAD"]; ?>">
         </div>
         <p class="info full-name"><?= $data["NAMA"]; ?></p>
         <p class="info role">
@@ -112,21 +111,22 @@ while ($data = mysqli_fetch_array($query)) {
         <!-- <img src="./assets/QR_code_for_mobile_English_Wikipedia.svg.png"> -->
         <?php
 
-        $tempdir = "temp/"; //Nama folder tempat menyimpan file qrcode
-        if (!file_exists($tempdir)) //Buat folder bername temp
-            mkdir($tempdir);
+    $tempdir = "temp/"; //Nama folder tempat menyimpan file qrcode
+    if (!file_exists($tempdir)) //Buat folder bername temp
+    {
+      mkdir($tempdir);
+    }
 
-        //isi qrcode jika di scan
-        $codeContents = 'http://localhost/KP-BMKG/';
+    //isi qrcode jika di scan
+    $codeContents = 'http://localhost/KP-BMKG/';
 
-        //simpan file kedalam folder temp dengan nama 001.png
-        QRcode::png($codeContents, $tempdir . "001.png");
+    //simpan file kedalam folder temp dengan nama 001.png
+    QRcode::png($codeContents, $tempdir . "001.png");
 
-
-        echo '';
-        //menampilkan file qrcode 
-        echo '<img src="' . $tempdir . '001.png" width= "100%" ; />';
-        ?>
+    echo '';
+    //menampilkan file qrcode
+    echo '<img src="' . $tempdir . '001.png" width= "100%" ; />';
+    ?>
         <!-- </div> -->
     </div>
     <br>
