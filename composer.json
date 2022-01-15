@@ -1,0 +1,8 @@
+{
+    "require": {
+        "joshcam/mysqli-database-class": "dev-master",
+        "josantonius/session": "^1.0",
+        "verot/class.upload.php": "^2.1",
+        "bacon/bacon-qr-code": "^2.0"
+    }
+}
